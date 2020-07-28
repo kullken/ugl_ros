@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ugl_ros</name>
+  <version>0.0.1</version>
+  <description>The ugl_ros package</description>
+  <license>BSD</license>
+
+  <maintainer email="karl.viktor.kull@gmail.com">Viktor Kull</maintainer>
+  <author email="karl.viktor.kull@gmail.com">Viktor Kull</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>ugl</depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>tf2_geometry_msgs</depend>
+
+  <export>
+
+  </export>
+</package>
