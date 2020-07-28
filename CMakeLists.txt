@@ -45,3 +45,26 @@ catkin_package(
   # CATKIN_DEPENDS
   # DEPENDS
 )
+
+###########
+## Build ##
+###########
+
+add_library(${PROJECT_NAME}_convert SHARED
+  src/convert.cpp
+)
+
+target_include_directories(${PROJECT_NAME}_convert
+  PUBLIC
+    include
+    ${catkin_INCLUDE_DIRS}
+)
+
+target_link_libraries(${PROJECT_NAME}_convert
+  PUBLIC
+    ugl::math
+    ${catkin_LIBRARIES}
+  PRIVATE
+    project_options
+    project_warnings
+)
