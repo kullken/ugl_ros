@@ -10,12 +10,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>ugl</depend>
-
   <depend>geometry_msgs</depend>
+  <depend>roscpp</depend>
   <depend>tf2_geometry_msgs</depend>
+  <depend>ugl</depend>
+  <depend>ugl_msgs</depend>
 
-  <export>
-
-  </export>
 </package>

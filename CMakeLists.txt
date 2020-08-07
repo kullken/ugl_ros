@@ -4,7 +4,9 @@ project(ugl_ros)
 find_package(catkin REQUIRED 
   COMPONENTS
     geometry_msgs
+    roscpp
     tf2_geometry_msgs
+    ugl_msgs
 )
 
 find_package(ugl REQUIRED)
@@ -52,6 +54,7 @@ catkin_package(
 
 add_library(${PROJECT_NAME}_convert SHARED
   src/convert_tf2.cpp
+  src/convert_ugl.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_convert
@@ -63,6 +66,7 @@ target_include_directories(${PROJECT_NAME}_convert
 target_link_libraries(${PROJECT_NAME}_convert
   PUBLIC
     ugl::math
+    ugl::trajectory
     ${catkin_LIBRARIES}
   PRIVATE
     project_options
