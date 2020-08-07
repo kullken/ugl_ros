@@ -51,7 +51,7 @@ catkin_package(
 ###########
 
 add_library(${PROJECT_NAME}_convert SHARED
-  src/convert.cpp
+  src/convert_tf2.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_convert
