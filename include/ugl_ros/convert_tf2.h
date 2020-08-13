@@ -6,19 +6,16 @@
 #include <ugl/math/vector.h>
 #include <ugl/math/matrix.h>
 #include <ugl/math/quaternion.h>
+#include <ugl/lie_group/rotation.h>
 
 namespace tf2
 {
 
 inline
-ugl::Rotation fromMsg(const geometry_msgs::Quaternion& in)
+ugl::lie::Rotation fromMsg(const geometry_msgs::Quaternion& in)
 {
-    ugl::UnitQuaternion q;
-    q.x() = in.x;
-    q.y() = in.y;
-    q.z() = in.z;
-    q.w() = in.w;
-    return q.toRotationMatrix();
+    ugl::UnitQuaternion q{in.w, in.x, in.y, in.z};
+    return ugl::lie::Rotation{q.toRotationMatrix()};
 }
 
 inline
@@ -64,9 +61,9 @@ geometry_msgs::Quaternion toMsg(const ugl::UnitQuaternion& in)
 }
 
 inline
-geometry_msgs::Quaternion toMsg(const ugl::Rotation& in)
+geometry_msgs::Quaternion toMsg(const ugl::lie::Rotation& in)
 {
-    return tf2::toMsg(ugl::UnitQuaternion(in));
+    return tf2::toMsg(in.to_quaternion());
 }
 
 inline
@@ -95,10 +92,10 @@ geometry_msgs::Quaternion& toMsg(const ugl::UnitQuaternion& in, geometry_msgs::Q
 }
 
 inline
-geometry_msgs::Quaternion& toMsg(const ugl::Rotation& in, geometry_msgs::Quaternion& out)
+geometry_msgs::Quaternion& toMsg(const ugl::lie::Rotation& in, geometry_msgs::Quaternion& out)
 {
     out = tf2::toMsg(in);
     return out;
 }
 
-}
+} // namespace tf2

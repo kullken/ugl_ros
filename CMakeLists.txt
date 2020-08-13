@@ -67,6 +67,7 @@ target_link_libraries(${PROJECT_NAME}_convert
   PUBLIC
     ugl::math
     ugl::trajectory
+    ugl::lie_group
     ${catkin_LIBRARIES}
   PRIVATE
     project_options
