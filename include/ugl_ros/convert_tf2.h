@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UGL_ROS_CONVERT_TF2_H
+#define UGL_ROS_CONVERT_TF2_H
 
 #include <tf2/convert.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
@@ -99,3 +100,5 @@ geometry_msgs::Quaternion& toMsg(const ugl::lie::Rotation& in, geometry_msgs::Qu
 }
 
 } // namespace tf2
+
+#endif // UGL_ROS_CONVERT_TF2_H

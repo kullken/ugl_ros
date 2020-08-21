@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UGL_ROS_CONVERT_UGL_H
+#define UGL_ROS_CONVERT_UGL_H
 
 #include <algorithm>
 #include <iterator>
@@ -28,9 +29,9 @@ ugl_msgs::Bezier toMsg(const ugl::trajectory::Bezier<degree>& bezier)
 {
     ugl_msgs::Bezier msg{};
     msg.duration = ros::Duration{bezier.duration()};
-    std::transform(std::begin(bezier.points()), 
-                   std::end(bezier.points()), 
-                   std::back_inserter(msg.points), 
+    std::transform(std::begin(bezier.points()),
+                   std::end(bezier.points()),
+                   std::back_inserter(msg.points),
                    [](const auto& vec){ return tf2::toMsg<geometry_msgs::Point>(vec); });
     return msg;
 }
@@ -65,5 +66,6 @@ ugl_msgs::SlerpSequence toMsg(const ugl::trajectory::SlerpSequence& sequence)
     return msg;
 }
 
+} // namespace ugl_ros
 
-}
+#endif // UGL_ROS_CONVERT_UGL_H
