@@ -13,10 +13,9 @@ namespace tf2
 {
 
 inline
-ugl::lie::Rotation fromMsg(const geometry_msgs::Quaternion& in)
+ugl::UnitQuaternion fromMsg(const geometry_msgs::Quaternion& in)
 {
-    ugl::UnitQuaternion q{in.w, in.x, in.y, in.z};
-    return ugl::lie::Rotation{q.toRotationMatrix()};
+    return ugl::UnitQuaternion{in.w, in.x, in.y, in.z};
 }
 
 inline
