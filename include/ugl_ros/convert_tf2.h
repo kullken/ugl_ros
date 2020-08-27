@@ -21,21 +21,13 @@ ugl::UnitQuaternion fromMsg(const geometry_msgs::Quaternion& in)
 inline
 ugl::Vector3 fromMsg(const geometry_msgs::Point& in)
 {
-    ugl::Vector3 out;
-    out.x() = in.x;
-    out.y() = in.y;
-    out.z() = in.z;
-    return out;
+    return ugl::Vector3{in.x, in.y, in.z};
 }
 
 inline
 ugl::Vector3 fromMsg(const geometry_msgs::Vector3& in)
 {
-    ugl::Vector3 out;
-    out.x() = in.x;
-    out.y() = in.y;
-    out.z() = in.z;
-    return out;
+    return ugl::Vector3{in.x, in.y, in.z};
 }
 
 template<typename MsgType>
