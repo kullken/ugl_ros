@@ -8,6 +8,7 @@
 #include <ugl/math/matrix.h>
 #include <ugl/math/quaternion.h>
 #include <ugl/lie_group/rotation.h>
+#include <ugl/lie_group/pose.h>
 
 namespace tf2
 {
@@ -88,6 +89,37 @@ geometry_msgs::Quaternion& toMsg(const ugl::lie::Rotation& in, geometry_msgs::Qu
 {
     out = tf2::toMsg(in);
     return out;
+}
+
+inline
+ugl::lie::Pose fromMsg(const geometry_msgs::Pose& msg)
+{
+    return ugl::lie::Pose{tf2::fromMsg(msg.orientation), tf2::fromMsg(msg.position)};
+}
+
+inline
+geometry_msgs::Pose& toMsg(const ugl::lie::Pose& in, geometry_msgs::Pose& out)
+{
+    tf2::toMsg(in.position(), out.position);
+    tf2::toMsg(in.rotation(), out.orientation);
+    return out;
+}
+
+inline
+geometry_msgs::Transform& toMsg(const ugl::lie::Pose& in, geometry_msgs::Transform& out)
+{
+    tf2::toMsg(in.position(), out.translation);
+    tf2::toMsg(in.rotation(), out.rotation);
+    return out;
+}
+
+template<typename MsgType>
+inline
+MsgType toMsg(const ugl::lie::Pose& in)
+{
+    MsgType msg;
+    tf2::toMsg(in, msg);
+    return msg;
 }
 
 } // namespace tf2
