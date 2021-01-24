@@ -7,6 +7,7 @@
 #include <ros/duration.h>
 
 #include <geometry_msgs/Point.h>
+#include <geometry_msgs/Twist.h>
 
 #include <ugl/math/vector.h>
 #include <ugl/trajectory/bezier.h>
@@ -23,6 +24,32 @@
 
 namespace ugl_ros
 {
+
+inline
+ugl::Vector<6> fromMsg(const geometry_msgs::Twist& msg)
+{
+    Eigen::Matrix<double,6,1> twist{};
+    const Eigen::Vector3d angular{msg.angular.x , msg.angular.y , msg.angular.z};
+    const Eigen::Vector3d linear{msg.linear.x , msg.linear.y, msg.linear.z};
+    twist << angular, linear;
+    return twist;
+}
+
+inline
+geometry_msgs::Twist& toMsg(const ugl::Vector<6>& in, geometry_msgs::Twist& out)
+{
+    tf2::toMsg(in.segment<3>(0), out.angular);
+    tf2::toMsg(in.segment<3>(3), out.linear);
+    return out;
+}
+
+inline
+geometry_msgs::Twist toMsg(const ugl::Vector<6>& twist)
+{
+    geometry_msgs::Twist msg{};
+    toMsg(twist, msg);
+    return msg;
+}
 
 template<int degree>
 ugl_msgs::Bezier toMsg(const ugl::trajectory::Bezier<degree>& bezier)
